@@ -1,0 +1,9 @@
+#!include:.gitignore
+
+/*.ipynb
+/*.pynb*/
+.git/
+Makefile
+.env
+
+!.env-vars.yaml
