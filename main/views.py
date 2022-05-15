@@ -32,8 +32,29 @@ class ImagePackageViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def get_image_packages(self, request):
         image_packages = models.ImagePackage.objects.all()
-        serializer = serializers.ImagePackageSerializer(image_packages, many=True)
+        serializer = self.serializer_classs(image_packages, many=True)
         return Response(serializer.data)
+
+class VideoPackageViewSet(viewsets.ModelViewSet):
+    queryset = models.VideoPackage.objects.all()
+    serializer_class = serializers.VideoPackageSerializer
+
+    @action(detail=False, methods=['get'])
+    def get_video_packages(self, request):
+        video_packages = models.VideoPackage.objects.all()
+        serializer = self.serializer_class(video_packages, many=True)
+        return Response(serializer.data)
+
+class AudioPackageViewSet(viewsets.ModelViewSet):
+    queryset = models.AudioPackage.objects.all()
+    serializer_class = serializers.AudioPackageSerializer
+
+    @action(detail=False, methods=['get'])
+    def get_audio_packages(self, request):
+        audio_packages = models.AudioPackage.objects.all()
+        serializer = self.serializer_class(audio_packages, many=True)
+        return Response(serializer.data)
+
 
 class ItemPackageViewSet(viewsets.ModelViewSet):
     queryset = models.ItemPackage.objects.all()

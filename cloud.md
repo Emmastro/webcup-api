@@ -16,7 +16,6 @@ DJPASS="$(cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 30 | head -n 
 gcloud sql users create djuser --instance webcup-db --password $DJPASS
 
 
-
 PROJECT_ID=$(gcloud config get-value core/project)
 
 REGION=us-central1
@@ -77,3 +76,9 @@ gcloud run deploy django-cloudrun \
   --allow-unauthenticated
 
 
+
+gcloud builds submit --pack image=gcr.io/${PROJECT_ID}/webcup-image
+gcloud run services update django-cloudrun \
+  --platform managed \
+  --region $REGION \
+  --image gcr.io/${PROJECT_ID}/webcup-image

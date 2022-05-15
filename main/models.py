@@ -5,17 +5,33 @@ from accounts.models import Client
 class Location(models.Model):
     name = models.CharField(max_length=50)
 
+
 class Package(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
+
 class TextPackage(Package):
-    text = models.TextField() # the text that will need to be printed and set to the selected location
-    medium = models.CharField(max_length=50) # what the user wants the text to be printed on
+    # the text that will need to be printed and set to the selected location
+    text = models.TextField()
+    # what the user wants the text to be printed on
+    medium = models.CharField(max_length=50)
+
 
 class ImagePackage(Package):
-    image = models.ImageField()
-    medium = models.CharField(max_length=50) # what the user wants the image to be printed on
+    image = models.ImageField(upload_to="media/images")
+    medium = models.CharField(max_length=50)
+
+
+class AudioPackage(Package):
+    audio = models.FileField(upload_to='media/audio/')
+    medium = models.CharField(max_length=50)
+
+
+class VideoPackage(Package):
+    video = models.FileField(upload_to='media/videos/')
+    medium = models.CharField(max_length=50)
+
 
 class ItemPackage(Package):
 

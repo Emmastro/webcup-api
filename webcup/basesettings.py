@@ -10,9 +10,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -69,7 +66,19 @@ REST_FRAMEWORK = {
 }
 
 
-#CORS_ALLOWED_ORIGINS = ['*']
+CORS_ALLOWED_ORIGINS = [
+    'https://alc-ninjas-app.herokuapp.com',
+    'http://localhost:3000',
+    'http://127.0.0.0:3000'
+    ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+PREPEND_WWW = False
+
+#APPEND_SLASH = False
 
 ROOT_URLCONF = 'webcup.urls'
 
@@ -134,6 +143,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "accounts.Client"
+
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'accounts.serializers.CustomTokenSerializer'
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

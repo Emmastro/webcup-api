@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import*
+
+admin.site.register(Location)
+admin.site.register(TextPackage)
+admin.site.register(ImagePackage)
+admin.site.register(ItemPackage)
+admin.site.register(AudioPackage)
+admin.site.register(VideoPackage)

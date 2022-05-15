@@ -1,5 +1,3 @@
-from csv import excel
-from email.policy import default
 import io
 import os
 from urllib.parse import urlparse
@@ -28,13 +26,18 @@ SECRET_KEY = env("SECRET_KEY")
 # If defined, add service URL to Django security settings
 CLOUDRUN_SERVICE_URL = env("CLOUDRUN_SERVICE_URL", default=None)
 if CLOUDRUN_SERVICE_URL:
-    ALLOWED_HOSTS = [urlparse(CLOUDRUN_SERVICE_URL).netloc]
-    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL]
+    ALLOWED_HOSTS = [urlparse(CLOUDRUN_SERVICE_URL).netloc, 'alc-ninjas-app.herokuapp.com', 'localhost:3000']
+    CSRF_TRUSTED_ORIGINS = [
+        CLOUDRUN_SERVICE_URL,
+        'https://alc-ninjas-app.herokuapp.com',
+        'http://localhost:3000',
+        'https://django-cloudrun-lsmeeds47a-uc.a.run.app']
 else:
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ['*'] # ['https://alc-ninjas-app.herokuapp.com', 'http://localhost:3000', 'localhost', 'http://localhost']
 
 # Default false. True allows default landing pages to be visible
 DEBUG = env("DEBUG", default=False)
+
 HOST = env("HOST", default=None)
 
 # Set this value from django-environ
